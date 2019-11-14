@@ -11,7 +11,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.0/sweetalert2.all.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.0/sweetalert2.min.css" />
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.0/sweetalert2.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
@@ -19,32 +20,127 @@
     <div class="container">
         <div><br></div>
         <div class="text-center">
-            <button class="btn btn-primary">Primary</button>
+            <button class="btn btn-primary" id="ip">Get IP</button>
             <button class="btn btn-danger">Danger</button>
             <button class="btn btn-info" id="info">Info</button>
+            <button class="btn btn-primary" id="img">Image</button>
+            <button class="btn btn-primary" id="urd">Urdu</button>
+            <button class="btn btn-primary" id="testjs">Test JavaScript</button>
         </div>
     </div>
 
-<script>
-$("#info").click(function(){
-    swal({
-  title: '<strong>HTML <u>example</u></strong>',
-  type: 'info',
-  html:
-    'You can use <b>bold text</b>, ' +
-    '<a href="//sweetalert2.github.io">links</a> ' +
-    'and other HTML tags',
-  showCloseButton: true,
-  showCancelButton: true,
-  focusConfirm: false,
-  confirmButtonText:
-    '<i class="fa fa-thumbs-up"></i> Great!',
-  confirmButtonAriaLabel: 'Thumbs up, great!',
-  cancelButtonText:
-    '<i class="fa fa-thumbs-down"></i>',
-  cancelButtonAriaLabel: 'Thumbs down'
-})
-})
-</script>    
+    <script>
+        $("#info").click(function () {
+            swal({
+                title: '<strong>HTML <u>example</u></strong>',
+                type: 'info',
+                html:
+                    'You can use <b>bold text</b>, ' +
+                    '<a href="//sweetalert2.github.io">links</a> ' +
+                    'and other HTML tags',
+                showCloseButton: true,
+                showCancelButton: true,
+                focusConfirm: false,
+                confirmButtonText:
+                    '<i class="fa fa-thumbs-up"></i> Great!',
+                confirmButtonAriaLabel: 'Thumbs up, great!',
+                cancelButtonText:
+                    '<i class="fa fa-thumbs-down"></i>',
+                cancelButtonAriaLabel: 'Thumbs down'
+            })
+        })
+
+        $("#img").click(function () {
+            swal({
+                title: 'Sweet!',
+                text: 'Modal with a custom image.',
+                imageUrl: 'https://images.pexels.com/photos/1382728/pexels-photo-1382728.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260',
+                imageWidth: 400,
+                imageHeight: 200,
+                imageAlt: 'Custom image',
+            })
+        })
+
+        $("#urd").click(function () {
+            swal({
+                title: 'آپ کیسے ہو؟',
+                type: 'question',
+                iconHtml: '؟',
+                confirmButtonText: 'ٹھیک ہوں',
+                cancelButtonText: 'ٹھیک نہی ہوں',
+                showCancelButton: true,
+                showCloseButton: true
+
+            })
+        })
+
+        $("#ip").click(function () {
+            var ipAPI = '//api.ipify.org?format=json'
+            alert(ipAPI)
+            swal({
+                title: 'Your public IP',
+                confirmButtonText: 'Show my public IP',
+                text:
+                    'Your public IP will be received ' +
+                    'via AJAX request',
+                showLoaderOnConfirm: true,
+                preConfirm: () => {
+                    return fetch(ipAPI)
+                        .then(response => response.json())
+                        .then(data => swal.insertQueueStep(data.ip))
+                        .catch(() => {
+                            swal.insertQueueStep({
+                                icon: 'error',
+                                title: 'Unable to get your public IP'
+                            })
+                        })
+                }
+            })
+        })
+
+        $("#testjs").click(function () {
+            const app = document.getElementById('root')
+
+            const logo = document.createElement('img')
+            logo.src = 'logo.png'
+
+            const container = document.createElement('div')
+            container.setAttribute('class', 'container')
+
+            app.appendChild(logo)
+            app.appendChild(container)
+
+            var request = new XMLHttpRequest()
+            request.open('GET', 'https://ghibliapi.herokuapp.com/films', true)
+            request.onload = function () {
+                // Begin accessing JSON data here
+                var data = JSON.parse(this.response)
+                if (request.status >= 200 && request.status < 400) {
+                    data.forEach(movie => {
+                        const card = document.createElement('div')
+                        card.setAttribute('class', 'card')
+
+                        const h1 = document.createElement('h1')
+                        h1.textContent = movie.title
+
+                        const p = document.createElement('p')
+                        movie.description = movie.description.substring(0, 300)
+                        p.textContent = `${movie.description}...`
+
+                        container.appendChild(card)
+                        card.appendChild(h1)
+                        card.appendChild(p)
+                    })
+                } else {
+                    const errorMessage = document.createElement('marquee')
+                    errorMessage.textContent = `Gah, it's not working!`
+                    app.appendChild(errorMessage)
+                }
+            }
+
+            request.send()
+        })
+    </script>
 </body>
+
 </html>
