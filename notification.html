@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/pnotify/3.2.1/pnotify.animate.js"></script> -->
+    <script src="https://unpkg.com/pnotify@4.0.0/dist/umd/PNotify.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/pnotify@4.0.0/dist/PNotifyBrightTheme.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pnotify/3.2.1/pnotify.animate.js"></script>
+    <script src="pnotifyconfirm.js"></script>
+</head>
+<!-- <iframe width="420" height="315" src="https://www.youtube.com/embed/tgbNymZ7vqY" >
+</iframe> -->
+<iframe width="420" height="315" src="https://www.youtube.com/embed/fYVeE6v407U">
+</iframe>
+<body>
+    <button onclick="called()">Called</button>
+    <script>
+        function called() {
+            PNotify.notice({
+                title: 'You Will Receive a Side',
+                text: 'You have no choice.',
+                icon: 'fas fa-info-circle',
+                hide: false,
+                modules: {
+                    Confirm: {
+                        confirm: true,
+                        buttons: [{
+                            text: 'Done',
+                            primary: true,
+                            click: function (notice) {
+                                notice.close();
+                                location.reload();
+                            }
+                        }]
+                    },
+                    Buttons: {
+                        closer: false,
+                        sticker: false
+                    },
+                    History: {
+                        history: false
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://unpkg.com/pnotify@4.0.0/dist/umd/PNotify.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/pnotify@4.0.0/dist/PNotifyBrightTheme.css">
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"
+        integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+    <!-- <script type="text/javascript" src="pnotify.custom.min.js"></script>
+<link href="pnotify.custom.min.css" media="all" rel="stylesheet" type="text/css" /> -->
+</head>
+
+<body>
+    <!-- <p>No of Country</p><p id="noc"></p> -->
+    <!-- <img src="https://restcountries.eu/data/ven.svg" alt="" id="cflag" ></img> -->
+    <div id="imagediv"></div>
+</body>
+<script>
+    var a = ["a", "b", "c"];
+    a.forEach(function (entry) {
+        console.log(entry);
+    });
+
+    var request = new XMLHttpRequest();
+    request.open('GET', 'https://restcountries.eu/rest/v2/all', true)
+    request.onload = function () {
+        var data = JSON.parse(this.response)
+        console.log(data)
+        var i = 0;
+        data.forEach(country => {
+            i++;
+            console.log("Country Name: " + country.name + " Capital: " + country.flag)
+            // if(country.name=='India'){
+            //      $("#cflag").attr('src',country.flag);
+            // }
+
+            var img = $('<img id="imgid'+i+'" height="100" width="100">'); //Equivalent: $(document.createElement('img'))
+            img.attr('src', country.flag);
+            img.className = "asad";
+            img.appendTo('#imagediv');
+            console.log(img)
+        })
+        // $("#noc").text(i)
+
+    }
+    request.send();
+
+</script>
+
+</html>

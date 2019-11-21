@@ -8,8 +8,8 @@
     <title>Document</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script> -->
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.0/sweetalert2.all.min.js"></script>
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.0/sweetalert2.min.css" />
@@ -26,10 +26,37 @@
             <button class="btn btn-primary" id="img">Image</button>
             <button class="btn btn-primary" id="urd">Urdu</button>
             <button class="btn btn-primary" id="testjs">Test JavaScript</button>
+            <button class="btn btn-primary" id="msg">Basic Message</button>
         </div>
     </div>
 
     <script>
+        $("#msg").click(function () {
+            swal({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then(function (isConfirm) {
+                if (isConfirm) {
+                    swal({
+                        title: 'Shortlisted!',
+                        text: 'Candidates are successfully shortlisted!',
+                        icon: 'success'
+                    })
+                } else {
+                    swal({
+                        title: 'Shortlisted!',
+                        text: 'Candidates are successfully shortlisted!',
+                        icon: 'success'
+                    })
+                }
+            })
+
+        })
         $("#info").click(function () {
             swal({
                 title: '<strong>HTML <u>example</u></strong>',
@@ -51,14 +78,24 @@
         })
 
         $("#img").click(function () {
+            // swal({
+            //     title: 'Sweet!',
+            //     text: 'Modal with a custom image.',
+            //     imageUrl: 'https://images.pexels.com/photos/1382728/pexels-photo-1382728.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260',
+            //     imageWidth: 400,
+            //     imageHeight: 200,
+            //     imageAlt: 'Custom image',
+            // })
             swal({
-                title: 'Sweet!',
-                text: 'Modal with a custom image.',
-                imageUrl: 'https://images.pexels.com/photos/1382728/pexels-photo-1382728.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260',
-                imageWidth: 400,
-                imageHeight: 200,
-                imageAlt: 'Custom image',
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
             })
+            // location.reload()
         })
 
         $("#urd").click(function () {
@@ -70,8 +107,8 @@
                 cancelButtonText: 'ٹھیک نہی ہوں',
                 showCancelButton: true,
                 showCloseButton: true
-
             })
+
         })
 
         $("#ip").click(function () {
